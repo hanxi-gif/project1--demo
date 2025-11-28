@@ -24,7 +24,7 @@ LE_PATH = "eeg_label_encoder.pkl"
 def load_and_preprocess_data():
     """加载CSV数据+预处理（IIR+ICA）"""
     # 加载数据
-    df = pd.read_csv("https://pan.baidu.com/s/1aH0a5ZX3-C40-BXaMFSpRw")
+    df = pd.read_csv("E:\数据集\kaggle数据集\脑电图运动想象BCICIV_2a\BCICIV_2a_all_patients.csv")
     eeg_data = df.iloc[:, 4:26].values.T  # [通道数, 时间点]
     raw_labels = df.iloc[:, 2].values
 
@@ -153,4 +153,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
