@@ -18,7 +18,7 @@ MODEL_PATH = "eeg_intent_model.pkl"
 SCALER_PATH = "eeg_scaler.pkl"
 LE_PATH = "eeg_label_encoder.pkl"
 # 关键修改：用GitHub仓库里的数据集文件名（不是本地路径）
-DATA_PATH = "E:\数据集\kaggle数据集\脑电图运动想象BCICIV_2a\BCICIV_2a_all_patients.csv"
+DATA_PATH = "BCICIV_2a_all_patients.csv"
 
 # 新增：数据集标签中英文映射（解决指令匹配问题）
 LABEL_CN_MAP = {
@@ -258,3 +258,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
