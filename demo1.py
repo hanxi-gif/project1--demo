@@ -18,13 +18,13 @@ MODEL_PATH = "eeg_intent_model.pkl"
 SCALER_PATH = "eeg_scaler.pkl"
 LE_PATH = "eeg_label_encoder.pkl"
 # 关键修改：用GitHub仓库里的数据集文件名（不是本地路径）
-DATA_PATH = "BCICIV_2a_all_patients.csv"
+DATA_PATH = "E:\数据集\kaggle数据集\脑电图运动想象BCICIV_2a\BCICIV_2a_all_patients.csv"
 
 # 新增：数据集标签中英文映射（解决指令匹配问题）
 LABEL_CN_MAP = {
-    "left_hand": "左手运动",
-    "right_hand": "右手运动",
-    "feet": "双脚运动",
+    "left": "左手运动",
+    "right": "右手运动",
+    "foot": "双脚运动",
     "tongue": "舌头运动"
 }
 
@@ -182,17 +182,17 @@ def main():
         st.write("自定义每个运动意图对应的具体控制指令：")
         # 关键修改：用数据集中的英文标签作为键，界面显示中文
         intent_map = {
-            "left_hand": st.selectbox(
+            "left": st.selectbox(
                 "左手运动 → 指令",
                 options=["轮椅左拐", "打开灯光", "假肢左手抓取", "播放音乐"],
                 index=0
             ),
-            "right_hand": st.selectbox(
+            "right": st.selectbox(
                 "右手运动 → 指令",
                 options=["轮椅右拐", "关闭灯光", "假肢右手释放", "暂停音乐"],
                 index=0
             ),
-            "feet": st.selectbox(
+            "foot": st.selectbox(
                 "双脚运动 → 指令",
                 options=["轮椅前进", "打开窗帘", "调节音量+", "启动喝水装置"],
                 index=0
