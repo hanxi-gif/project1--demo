@@ -1502,8 +1502,6 @@ def create_enhanced_security_dashboard():
 
 # ===================== 主界面 =====================
 def main():
-    def main():
-    # 初始化所有关键变量，防止未定义报错
     current_command = "N/A"
     allowed = False
     safety_logs = []
