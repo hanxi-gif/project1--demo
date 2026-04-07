@@ -1502,6 +1502,17 @@ def create_enhanced_security_dashboard():
 
 # ===================== 主界面 =====================
 def main():
+    def main():
+    # 初始化所有关键变量，防止未定义报错
+    current_command = "N/A"
+    allowed = False
+    safety_logs = []
+    safety_checks = {}
+    structured_cmd = "N/A"
+    risk_score = 0.0
+    current_state = "NORMAL"
+    current_mode = "simple"  # 初始化模式
+
     st.set_page_config(
         page_title="脑电意图识别与增强安全控制",
         page_icon="🧠",
