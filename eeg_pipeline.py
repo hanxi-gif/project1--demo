@@ -7,14 +7,17 @@ from typing import Any
 
 import numpy as np
 
-
+import os
 BASE_DIR = Path(__file__).resolve().parent
 DATA_CANDIDATES = [
     BASE_DIR / "BCICIV_2a_all_patients.csv",
     BASE_DIR / "data" / "demo_patients.csv",
+    Path(os.environ.get("EEG_DATA_PATH", "")) if os.environ.get("EEG_DATA_PATH") else None,
 ]
+DATA_CANDIDATES = [p for p in DATA_CANDIDATES if p is not None]
 DATA_PATH = next((path for path in DATA_CANDIDATES if path.exists()), DATA_CANDIDATES[-1])
-
+if DATA_PATH is None or not DATA_PATH.exists():
+    print("⚠️ 警告: 未找到数据文件，请设置环境变量 EEG_DATA_PATH 或手动指定路径")
 MODELS_DIR = BASE_DIR / "models"
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 REPORTS_DIR = BASE_DIR / "reports"
