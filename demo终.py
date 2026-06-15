@@ -8,15 +8,27 @@ import time
 import json
 import random
 import logging
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from datetime import datetime, timedelta
 from collections import Counter, deque
 from typing import Dict, List, Any, Tuple, Optional
-from eeg_pipeline import (
-    DATA_PATH,
-    get_feature_cache_path,
-    get_model_paths,
-    load_feature_cache,
-)
+try:
+    from eeg_pipeline import (
+        DATA_PATH,
+        get_feature_cache_path,
+        get_model_paths,
+        load_feature_cache,
+    )
+except ImportError:
+    sys.path.insert(0, os.getcwd())
+    from eeg_pipeline import (
+        DATA_PATH,
+        get_feature_cache_path,
+        get_model_paths,
+        load_feature_cache,
+    )
 
 warnings.filterwarnings("ignore")
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
