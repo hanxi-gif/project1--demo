@@ -16,7 +16,7 @@ ENV/
 
 # 项目生成文件
 artifacts/
-models/
+
 reports/
 latest_prediction.json
 
