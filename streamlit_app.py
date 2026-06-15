@@ -33,7 +33,7 @@ if not FEATURES_PATH.exists():
     st.success("特征缓存生成完成！")
 
 # 之后再导入你的其他模块、运行主界面代码
-from eeg_pipeline import ...
+from eeg_pipeline import *
 try:
     from eeg_pipeline import (
         DATA_PATH,
