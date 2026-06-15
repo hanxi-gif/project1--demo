@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-06-15 15:54:07",
+  "mode": "demo",
+  "data_path": "E:\\project1\\demo\\C4\\BCICIV_2a_all_patients.csv",
+  "samples": 64,
+  "feature_dim": 220,
+  "label_counts": {
+    "foot": 16,
+    "left": 16,
+    "right": 16,
+    "tongue": 16
+  },
+  "groups": 1,
+  "split_method": "StratifiedShuffleSplit(label)",
+  "train_samples": 51,
+  "test_samples": 13,
+  "accuracy": 0.15384615384615385,
+  "f1_weighted": 0.1346153846153846,
+  "cv_method": "StratifiedKFold(n_splits=5)",
+  "cv_scores": [
+    0.15384615384615385,
+    0.38461538461538464,
+    0.15384615384615385,
+    0.23076923076923078,
+    0.08333333333333333
+  ],
+  "cv_accuracy_mean": 0.2012820512820513,
+  "cv_accuracy_std": 0.10285215959041837,
+  "classification_report": "              precision    recall  f1-score   support\n\n        foot       0.00      0.00      0.00         3\n        left       0.20      0.33      0.25         3\n       right       0.00      0.00      0.00         4\n      tongue       0.33      0.33      0.33         3\n\n    accuracy                           0.15        13\n   macro avg       0.13      0.17      0.15        13\nweighted avg       0.12      0.15      0.13        13\n",
+  "preprocessing": {
+    "filter": "iir_2_40hz",
+    "ica": "mne.preprocessing.ICA",
+    "ica_components": 4,
+    "ica_exclude": [
+      0,
+      1
+    ],
+    "ica_note": "Fixed exclusion of components [0, 1] follows the competition document assumption for frontal artifacts."
+  },
+  "alignment": "csv_epoch_column"
+}
