@@ -17,15 +17,6 @@ from datetime import datetime, timedelta
 from collections import Counter, deque
 from typing import Dict, List, Any, Tuple, Optional
 
-from pathlib import Path
-import streamlit as st
-
-ARTIFACTS_DIR = Path("artifacts")
-FEATURES_PATH = ARTIFACTS_DIR / "features_demo.joblib"
-
-if not FEATURES_PATH.exists():
-    st.warning("⚠️  特征缓存文件不存在，演示模式无法运行。请先在本地运行 `python train.py --mode demo` 生成缓存，再上传到GitHub。")
-    st.stop()  # 不存在就直接停在这里，不往下跑了
 
 try:
     from eeg_pipeline import (
