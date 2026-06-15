@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# 项目生成文件
+artifacts/
+models/
+reports/
+latest_prediction.json
+
+# 大文件（如果用LFS不需要这个，但保留以防万一）
+*.csv
+!requirements.txt
+
+# 日志
+*.log
