@@ -9,11 +9,7 @@ import numpy as np
 
 import os
 BASE_DIR = Path(__file__).resolve().parent
-DATA_CANDIDATES = [
-    BASE_DIR / "BCICIV_2a_all_patients.csv",
-    BASE_DIR / "data" / "demo_patients.csv",
-    Path(os.environ.get("EEG_DATA_PATH", "")) if os.environ.get("EEG_DATA_PATH") else None,
-]
+DATA_CANDIDATES = BASE_DIR / "BCICIV_2a_all_patients.csv"
 DATA_CANDIDATES = [p for p in DATA_CANDIDATES if p is not None]
 DATA_PATH = next((path for path in DATA_CANDIDATES if path.exists()), DATA_CANDIDATES[-1])
 if DATA_PATH is None or not DATA_PATH.exists():
