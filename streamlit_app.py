@@ -10,10 +10,30 @@ import random
 import logging
 import os
 import sys
+import subprocess
+import streamlit as st
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from datetime import datetime, timedelta
 from collections import Counter, deque
 from typing import Dict, List, Any, Tuple, Optional
+
+from pathlib import Path
+
+# 定义缓存文件路径
+ARTIFACTS_DIR = Path("artifacts")
+FEATURES_PATH = ARTIFACTS_DIR / "features_demo.joblib"
+
+# 如果缓存文件不存在，自动运行训练脚本生成
+if not FEATURES_PATH.exists():
+    st.info("正在生成特征缓存文件，请稍候...")
+    # 创建目录
+    ARTIFACTS_DIR.mkdir(exist_ok=True)
+    # 运行训练命令
+    subprocess.run(["python", "train.py", "--mode", "demo"], check=True)
+    st.success("特征缓存生成完成！")
+
+# 之后再导入你的其他模块、运行主界面代码
+from eeg_pipeline import ...
 try:
     from eeg_pipeline import (
         DATA_PATH,
