@@ -14,9 +14,6 @@ ENV/
 .idea/
 *.swp
 
-# 项目生成文件
-artifacts/
-
 reports/
 latest_prediction.json
 
