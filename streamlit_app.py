@@ -3,40 +3,57 @@ import streamlit as st
 import numpy as np
 import joblib
 import warnings
-import matplotlib.pyplot as plt
 import time
 import json
 import random
 import logging
 import os
-import sys
-import subprocess
-import streamlit as st
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import shutil
 from datetime import datetime, timedelta
 from collections import Counter, deque
 from typing import Dict, List, Any, Tuple, Optional
+from eeg_pipeline import (
+    DATA_PATH,
+    get_feature_cache_path,
+    get_model_paths,
+    load_feature_cache,
+)
 
+# --- 清除 matplotlib 字体缓存，确保新安装的中文字体生效 ---
+def _clear_matplotlib_font_cache():
+    """Delete matplotlib's font cache so newly installed CJK fonts are discovered."""
+    cache_dir = os.path.join(os.path.expanduser("~"), ".cache", "matplotlib")
+    if os.path.isdir(cache_dir):
+        for name in os.listdir(cache_dir):
+            if name.startswith("fontlist"):
+                try:
+                    os.remove(os.path.join(cache_dir, name))
+                except OSError:
+                    pass
 
-try:
-    from eeg_pipeline import (
-        DATA_PATH,
-        get_feature_cache_path,
-        get_model_paths,
-        load_feature_cache,
-    )
-except ImportError:
-    sys.path.insert(0, os.getcwd())
-    from eeg_pipeline import (
-        DATA_PATH,
-        get_feature_cache_path,
-        get_model_paths,
-        load_feature_cache,
-    )
+_clear_matplotlib_font_cache()
 
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as _fm
+# 强制重建字体列表（不读缓存）
+_fm._load_fontmanager(try_read_cache=False)
+
+# --- 字体配置 ---
 warnings.filterwarnings("ignore")
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
-plt.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'DejaVu Sans']
+
+# 优先使用 Linux 服务器可用的中文字体，Windows 字体作为本地开发回退
+_CJK_FONT_CANDIDATES = [
+    "WenQuanYi Micro Hei",   # Streamlit Cloud (Linux) — packages.txt
+    "Noto Sans CJK SC",      # 备选 Linux 字体
+    "Microsoft YaHei",       # Windows 本地开发
+    "SimHei",                # Windows 备选
+    "DejaVu Sans",           # 最终回退（无中文）
+]
+# 只保留系统中实际存在的字体
+_available = {f.name for f in _fm.fontManager.ttflist}
+_usable = [f for f in _CJK_FONT_CANDIDATES if f in _available]
+plt.rcParams['font.sans-serif'] = _usable if _usable else _CJK_FONT_CANDIDATES
 plt.rcParams['font.weight'] = 'normal'
 plt.rcParams['axes.titleweight'] = 'normal'
 plt.rcParams['axes.labelweight'] = 'normal'
