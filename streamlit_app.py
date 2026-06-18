@@ -1200,9 +1200,9 @@ def plot_eeg_segment(eeg_segments, sfreq, trial_idx, ch_idx=0):
 
     fig, ax = plt.subplots(figsize=(10, 3))
     ax.plot(time_axis, data, color='#1890ff', linewidth=1.5)
-    ax.set_title(f'第{trial_idx + 1}试次 - 第{ch_idx + 1}通道脑电信号波形', fontsize=12)
-    ax.set_xlabel('时间 (s)', fontsize=10)
-    ax.set_ylabel('信号幅值 (μV)', fontsize=10)
+    ax.set_title(f'Trial {trial_idx + 1} - Channel {ch_idx + 1} EEG Waveform', fontsize=12)
+    ax.set_xlabel('Time (s)', fontsize=10)
+    ax.set_ylabel('Amplitude (uV)', fontsize=10)
     ax.grid(True, alpha=0.3)
     ax.set_facecolor('#f8f9fa')
     plt.tight_layout()
@@ -1210,14 +1210,14 @@ def plot_eeg_segment(eeg_segments, sfreq, trial_idx, ch_idx=0):
 
 
 def plot_confidence_bar(pred_proba, le):
-    labels = le.inverse_transform(range(len(pred_proba)))
-    labels_cn = [LABEL_CN_MAP.get(label, label) for label in labels]
+    labels_en = le.inverse_transform(range(len(pred_proba)))
+    labels_display = [label.upper() for label in labels_en]
     colors = ['#1890ff', '#2e7d32', '#f5a623', '#ff5252']
 
     fig, ax = plt.subplots(figsize=(8, 4))
-    bars = ax.bar(labels_cn, pred_proba * 100, color=colors, alpha=0.8)
-    ax.set_ylabel('置信度 (%)', fontsize=10)
-    ax.set_title('各类运动意图识别置信度', fontsize=12)
+    bars = ax.bar(labels_display, pred_proba * 100, color=colors, alpha=0.8)
+    ax.set_ylabel('Confidence (%)', fontsize=10)
+    ax.set_title('Intent Recognition Confidence', fontsize=12)
     ax.set_ylim(0, 100)
     ax.set_facecolor('#f8f9fa')
 
@@ -1233,11 +1233,11 @@ def plot_confidence_bar(pred_proba, le):
 def plot_freq_spectrum(f, Pxx):
     fig, ax = plt.subplots(figsize=(10, 3))
     ax.plot(f, Pxx, color='#ff5252', linewidth=1.5)
-    ax.axvspan(8, 13, alpha=0.2, color='green', label='α波段 (8-13Hz)')
-    ax.axvspan(13, 30, alpha=0.2, color='orange', label='β波段 (13-30Hz)')
-    ax.set_title('脑电信号频域功率谱', fontsize=12)
-    ax.set_xlabel('频率 (Hz)', fontsize=10)
-    ax.set_ylabel('功率谱密度', fontsize=10)
+    ax.axvspan(8, 13, alpha=0.2, color='green', label='Alpha (8-13Hz)')
+    ax.axvspan(13, 30, alpha=0.2, color='orange', label='Beta (13-30Hz)')
+    ax.set_title('EEG Frequency Power Spectrum', fontsize=12)
+    ax.set_xlabel('Frequency (Hz)', fontsize=10)
+    ax.set_ylabel('Power Spectral Density', fontsize=10)
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3)
     ax.set_facecolor('#f8f9fa')
